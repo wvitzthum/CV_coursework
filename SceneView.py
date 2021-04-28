@@ -53,7 +53,8 @@ z_values = []
 for (y,x), value in np.ndenumerate(disparityMap):
     x_1 = x-x_center
     y_1 = y-y_center
-
+    
+    # Ignore the black bar on the side
     if value < 1:
         continue
 
