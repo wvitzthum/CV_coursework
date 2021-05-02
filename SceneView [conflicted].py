@@ -6,12 +6,12 @@ from matplotlib import pyplot as plt
 
 def plot_3d(x, y, z):
     ax = plt.axes(projection ='3d')
-    ax.scatter(x, z, y, 'green', s=0.1)
+    ax.scatter(x, y, z, 'green')
 
     # Labels
     ax.set_xlabel('x')
-    ax.set_ylabel('z')
-    ax.set_zlabel('y')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
 
     #plt.savefig('myplot.pdf', bbox_inches='tight') # Can also specify an image, e.g. myplot.png
     plt.show()
@@ -50,11 +50,12 @@ x_values = []
 y_values = []
 z_values = []
 
-for (y,x), value in np.ndenumerate(disparityMap):
+#import pdb; pdb.set_trace()
+
+for (x,y), value in np.ndenumerate(disparityMap):
     x_1 = x-x_center
     y_1 = y-y_center
-    
-    # Ignore the black bar on the side
+
     if value < 1:
         continue
 
@@ -68,4 +69,8 @@ for (y,x), value in np.ndenumerate(disparityMap):
     y_values.append(y_new)
 
     #print(f"{x_new}, {y_new}, {z_new}")
-plot_3d(x_values, y_values, z_values)
+plot_3d(x_values, z_values, y_values,)
+
+#cv2.imshow('Disparity',  np.interp(disparityMap, (disparityMap.min(), disparityMap.max()), (0.0, 1.0)))
+
+#cv2.waitKey(0)
